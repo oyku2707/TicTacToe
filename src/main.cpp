@@ -1,20 +1,21 @@
-
 #include <SFML/Graphics.hpp>
+#include <optional>
 
 int main() {
-    // SFML 3.0'da VideoMode kullanımı Vector2u ile değişti
-    sf::RenderWindow window(sf::VideoMode({800, 600}), "Tic Tac Toe - SFML Calisiyor!");
+    // 600x600 boyutunda bir pencere oluşturuyoruz
+    sf::RenderWindow pencere (sf::VideoMode({600, 600}), "Tic Tac Toe");
 
-    while (window.isOpen()) {
-        // SFML 3.0'da event sistemi opsiyonel (std::optional) hale geldi
-        while (const std::optional event = window.pollEvent()) {
+    while (pencere.isOpen()) {
+        while (const std::optional event =pencere.pollEvent()) {
             if (event->is<sf::Event::Closed>()) {
-                window.close();
+                pencere.close();
             }
         }
+        //pencereyi temizle(beyaz yap)
+        pencere.clear(sf::Color::White);
 
-        window.clear(sf::Color::Blue);
-        window.display();
+        // Çizilenleri ekrana yansıt
+        pencere.display();
     }
 
     return 0;
