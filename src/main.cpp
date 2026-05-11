@@ -36,8 +36,11 @@ int main() {
                     int x = fareTiklamasi->position.x;
                     int y = fareTiklamasi->position.y;
                     
-                    // Kontrol etmek icin terminale yazdirma
-                    std::cout << "Tiklandi! X: " << x << " Y: " << y << std::endl;
+                    //hangi hücreyi tıkladıgını anlamak için
+                    int sutun=x/200;
+                    int satir=y/200;
+                    
+                    std::cout << "Hucreye Tiklandi: [" << satir << "][" << sutun << "]" << std::endl;
                 }
             }
         }
