@@ -1,3 +1,4 @@
+#include <iostream>
 #include <SFML/Graphics.hpp>
 #include <optional>
 
@@ -28,8 +29,20 @@ int main() {
             if (event->is<sf::Event::Closed>()) {
                 pencere.close();
             }
+            // Fare tıklamasını algılama
+            if (const auto* fareTiklamasi = event->getIf<sf::Event::MouseButtonPressed>()) {
+                if (fareTiklamasi->button == sf::Mouse::Button::Left) { //Solu tıkladıgını anlamak icin
+                    // Tıklanan koordinatları algılama
+                    int x = fareTiklamasi->position.x;
+                    int y = fareTiklamasi->position.y;
+                    
+                    // Kontrol etmek icin terminale yazdirma
+                    std::cout << "Tiklandi! X: " << x << " Y: " << y << std::endl;
+                }
+            }
         }
-        //pencereyi temizle(beyaz yap)
+        
+        //pencereyi temizle(acık gri yap)
         pencere.clear(sf::Color(211,211,211));
 
         for(const auto& cizgi:cizgiler){
@@ -37,7 +50,7 @@ int main() {
         }
         // Çizilenleri ekrana yansıt
         pencere.display();
-    }
-
+    
+}
     return 0;
 }
