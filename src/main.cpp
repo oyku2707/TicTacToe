@@ -8,6 +8,7 @@ int main() {
     sf::RenderWindow pencere (sf::VideoMode({600, 600}), "Tic Tac Toe");
 
     int tahta[3][3]={{0,0,0},{0,0,0},{0,0,0}};//Oyun tahtası bütün hücreler boş
+    int siraKimde=1;
     
     std::vector<sf::RectangleShape> cizgiler;
 
@@ -42,9 +43,16 @@ int main() {
                     //hangi hücreyi tıkladıgını anlamak için
                     int sutun=x/200;
                     int satir=y/200;
-                    
-                    tahta[satir][sutun]=1;//Tıklanan hücre 1 yapılacak
 
+                    if (tahta[satir][sutun] == 0) {//sadece hücre boşsa hamle yapmasını sağla.
+                       tahta[satir][sutun] = siraKimde;
+
+                        if (siraKimde == 1) {
+                         siraKimde = 2; }
+                        else {
+                         siraKimde = 1;}
+                        
+                     }
                     //kontrol için terminale yazdırma
                     std::cout << "\n--- TIKLAMA SONRASI TAHTA ---" << std::endl;
                     for (int i = 0; i < 3; i++) {
@@ -54,6 +62,8 @@ int main() {
                         std::cout << std::endl;
                     }
                     std::cout << "-----------------------------" << std::endl;
+                    std::cout << "Siradaki Oyuncu: " << (siraKimde == 1 ? "X" : "O") << std::endl;
+                    
                 }
             }
         }
