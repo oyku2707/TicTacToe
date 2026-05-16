@@ -5,12 +5,18 @@
 
 int main() {
     // 600x600 boyutunda bir pencere oluşturuyoruz
-    sf::RenderWindow pencere (sf::VideoMode({600, 600}), "Tic Tac Toe");
+    sf::RenderWindow pencere(sf::VideoMode({600, 600}), "Tic Tac Toe");
+
+    sf::ContextSettings ayarlar;
+    ayarlar.antiAliasingLevel = 8;//8 kat kenar yumuşatma
+
+    pencere.create(sf::VideoMode({600, 600}), "Tic Tac Toe", sf::State::Windowed, ayarlar);
 
     int tahta[3][3]={{0,0,0},{0,0,0},{0,0,0}};//Oyun tahtası bütün hücreler boş
     int siraKimde=1;
     
     std::vector<sf::RectangleShape> cizgiler;
+    std::vector<sf::CircleShape> daireler;
 
     for(int i=0;i<2;i++){
         // Dikey Çizgiler
@@ -46,6 +52,20 @@ int main() {
 
                     if (tahta[satir][sutun] == 0) {//sadece hücre boşsa hamle yapmasını sağla.
                        tahta[satir][sutun] = siraKimde;
+                       
+                       //O için görsel kısım
+                       sf::CircleShape daire(60.f);
+                       daire.setPointCount(150);//Daireyi daha pürüzsüz göstermek için
+                       daire.setFillColor(sf::Color::Transparent); 
+                       daire.setOutlineThickness(10.f); 
+                       daire.setOutlineColor(sf::Color::Blue); 
+
+                       daire.setOrigin({60.f, 60.f});//Dairenin merkezini kendi ortası yapıyoruz kareye tam oturması için
+
+                       float merkezX = sutun * 200.f + 100.f;//karenin merkez koordinatı 
+                       float merkezY = satir * 200.f + 100.f;
+                       daire.setPosition({merkezX, merkezY});
+                       daireler.push_back(daire);
 
                         if (siraKimde == 1) {
                          siraKimde = 2; }
@@ -73,6 +93,9 @@ int main() {
 
         for(const auto& cizgi:cizgiler){
             pencere.draw(cizgi);
+        }
+        for(const auto& daire : daireler){//daireyi çiz
+            pencere.draw(daire);
         }
         // Çizilenleri ekrana yansıt
         pencere.display();
