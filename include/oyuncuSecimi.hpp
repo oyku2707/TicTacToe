@@ -1,6 +1,9 @@
 #ifndef OYUNCU_SECIMI_HPP
 #define OYUNCU_SECIMI_HPP
+#include <SFML/Graphics.hpp>   
 
-int oyuncuSecimiAl();//X mi O mu seçimi
+void secimEkraniniCiz(sf::RenderWindow& pencere);
+
+int secimKontrolu(int x ,int y);
 
 #endif

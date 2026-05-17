@@ -5,20 +5,20 @@
 #include "../include/oyunMekanigi.hpp"
 #include "../include/oyuncuSecimi.hpp"
 
+enum OyunDurumu { secimAlani,oyunAlani};
+
 int main() {
-
-    int siraKimde=oyuncuSecimiAl();
-
-    // 600x600 boyutunda bir pencere oluşturuyoruz
+    // 1. Senin çalışan orijinal pencere satırın (Dokunmadık)
     sf::RenderWindow pencere(sf::VideoMode({600, 600}), "Tic Tac Toe");
 
-    sf::ContextSettings ayarlar;
-    ayarlar.antiAliasingLevel = 8;//8 kat kenar yumuşatma
-
-    pencere.create(sf::VideoMode({600, 600}), "Tic Tac Toe", sf::State::Windowed, ayarlar);
-
+    // 2. Açılır açılmaz kodla pencereyi 200x200'e küçültüyoruz
+    pencere.setSize(sf::Vector2u(200, 200));
+    pencere.setView(sf::View(sf::FloatRect({0.f, 0.f}, {200.f, 200.f})));
+   
+    OyunDurumu suan=secimAlani;
+    int siraKimde=1;
     int tahta[3][3]={{0,0,0},{0,0,0},{0,0,0}};//Oyun tahtası bütün hücreler boş
-    
+
     std::vector<sf::RectangleShape> cizgiler;
     std::vector<sf::CircleShape> daireler;
     std::vector<sf::RectangleShape> xCizgileri;// X çizgileri için vektör
@@ -47,10 +47,20 @@ int main() {
             // Fare tıklamasını algılama
             if (const auto* fareTiklamasi = event->getIf<sf::Event::MouseButtonPressed>()) {
                 if (fareTiklamasi->button == sf::Mouse::Button::Left) { //Solu tıkladıgını anlamak icin
+
                     // Tıklanan koordinatları algılama
                     int x = fareTiklamasi->position.x;
                     int y = fareTiklamasi->position.y;
-                    
+
+                    if (suan == secimAlani) {
+                        int secim = secimKontrolu(x,y);
+                        if (secim != 0) {
+                            siraKimde = secim; 
+                            suan = oyunAlani;  
+                            pencere.setSize(sf::Vector2u(600, 600));
+                            pencere.setView(sf::View(sf::FloatRect({0.f, 0.f}, {600.f, 600.f})));   
+                    }}
+                   else if(suan==oyunAlani) {
                     //hangi hücreyi tıkladıgını anlamak için
                     int sutun=x/200;
                     int satir=y/200;
@@ -113,11 +123,15 @@ int main() {
                          std::cout << "OYUN BERABERE BİTTİ!" << std::endl;
                           pencere.close();
                          }
-                    }
+                     }
+                  } 
                 }
-            }
-        }
+             }
         
+        if(suan==secimAlani){
+            secimEkraniniCiz(pencere);
+        }
+        else if(suan==oyunAlani){
         //pencereyi temizle(acık gri yap)
         pencere.clear(sf::Color(211,211,211));
 
@@ -132,7 +146,8 @@ int main() {
         }
         // Çizilenleri ekrana yansıt
         pencere.display();
-    
+    }
 }
+    }
     return 0;
-}
+    }
