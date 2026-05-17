@@ -1,27 +1,18 @@
-# Derleyici ve Standart
 CXX = g++
-CXXFLAGS = -std=c++17 -I/opt/homebrew/opt/sfml/include
-
-# SFML Kütüphaneleri (Mac/Homebrew için)
+CXXFLAGS = -std=c++17 -I/opt/homebrew/opt/sfml/include -I./include
 LDFLAGS = -L/opt/homebrew/opt/sfml/lib -lsfml-graphics -lsfml-window -lsfml-system
 
-# Dosya Yolları
-SRC_DIR = src
-SOURCES = $(wildcard $(SRC_DIR)/*.cpp)
-OBJECTS = $(SOURCES:.cpp=.o)
+SRC = src/main.cpp src/oyunMekanigi.cpp src/oyuncuSecimi.cpp
+OBJ = $(SRC:.cpp=.o)
 TARGET = main
 
-# Varsayılan Kural
 all: $(TARGET)
 
-# Bağlama (Linking)
-$(TARGET): $(OBJECTS)
-	$(CXX) $(OBJECTS) -o $(TARGET) $(LDFLAGS)
+$(TARGET): $(OBJ)
+	$(CXX) $(OBJ) -o $(TARGET) $(LDFLAGS)
 
-# Derleme (Compiling)
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Temizlik
 clean:
-	rm -f $(SRC_DIR)/*.o $(TARGET)
+	rm -f src/*.o $(TARGET)
