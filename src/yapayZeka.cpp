@@ -16,7 +16,7 @@ int minimax(int tahta[3][3], int derinlik, bool enYuksekAl) {
     if (skor == 1) return derinlik - 10;  
     if (skor == 3 || !hamleKaldiMi(tahta)) return 0; 
 
-    if (enYuksekAl) {//sıra yapayzekada 
+    if (enYuksekAl) {//sıra yapay zekada 
         int enIyi = INT_MIN;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -52,7 +52,7 @@ std::pair<int, int> enIyiHamleyiBul(int tahta[3][3], int bzYapayZeka) {
             if (tahta[i][j] == 0) {
                 tahta[i][j] = bzYapayZeka; // Yapay zeka buraya oynasın
 
-                // Sıradaki hamle insan oyuncunun olacağı için false gönderiyoruz
+                // Sıradaki hamle insan oyuncunun olacağı için false
                 int hamleDegeri = minimax(tahta, 0, false);
                 
                 tahta[i][j] = 0; // Tahtayı eski haline getir

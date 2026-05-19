@@ -11,10 +11,8 @@
 enum OyunDurumu { secimAlani,oyunAlani};
 
 int main() {
-    // 1. Senin çalışan orijinal pencere satırın (Dokunmadık)
     sf::RenderWindow pencere(sf::VideoMode({600, 600}), "Tic Tac Toe");
 
-    // 2. Açılır açılmaz kodla pencereyi 200x200'e küçültüyoruz
     pencere.setSize(sf::Vector2u(200, 200));
     pencere.setView(sf::View(sf::FloatRect({0.f, 0.f}, {200.f, 200.f})));
    

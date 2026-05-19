@@ -13,7 +13,7 @@ void xCizgisiEkle(std::vector<sf::RectangleShape>& xCizgileri, int satir, int su
     cizgi1.setRotation(sf::degrees(45.f)); 
     xCizgileri.push_back(cizgi1);
 
-    sf::RectangleShape cizgi2 = cizgi1;//x2in ikinci çizgisi
+    sf::RectangleShape cizgi2 = cizgi1;//x'in ikinci çizgisi
     cizgi2.setRotation(sf::degrees(135.f));
     xCizgileri.push_back(cizgi2);
 }
