@@ -4,6 +4,8 @@
 #include <vector>
 #include "../include/oyunMekanigi.hpp"
 #include "../include/oyuncuSecimi.hpp"
+#include "../include/oyunArayuzu.hpp"
+#include "../include/oyunTahtasi.hpp"
 
 enum OyunDurumu { secimAlani,oyunAlani};
 
@@ -23,21 +25,7 @@ int main() {
     std::vector<sf::CircleShape> daireler;
     std::vector<sf::RectangleShape> xCizgileri;// X çizgileri için vektör
 
-    for(int i=0;i<2;i++){
-        // Dikey Çizgiler
-        sf::RectangleShape dikey;
-        dikey.setSize(sf::Vector2f(10.f, 600.f));
-        dikey.setFillColor(sf::Color::Black);
-        dikey.setPosition(sf::Vector2f(200.f * (i + 1), 0.f));
-        cizgiler.push_back(dikey);
-
-        // Yatay Çizgiler
-        sf::RectangleShape yatay;
-        yatay.setSize(sf::Vector2f(600.f, 10.f));
-        yatay.setFillColor(sf::Color::Black);
-        yatay.setPosition(sf::Vector2f(0.f, 200.f * (i + 1)));
-        cizgiler.push_back(yatay);
-    }
+    tahtaCizgileriniOlustur(cizgiler);
 
     while (pencere.isOpen()) {
         while (const std::optional event =pencere.pollEvent()) {
@@ -69,48 +57,13 @@ int main() {
                        tahta[satir][sutun] = siraKimde;
 
                        if (siraKimde == 1) {
-                    
-                         float solUstX = sutun * 200.f;
-                         float solUstY = satir * 200.f;
-                         float kalinlik = 15.f;
-
-                         sf::RectangleShape cizgi1;// X'in birinci çizgisi
-                         cizgi1.setSize({170.f, kalinlik}); 
-                         cizgi1.setFillColor(sf::Color::Red); 
-                         cizgi1.setOrigin({85.f, kalinlik / 2.f}); //Dönme merkezi çizginin ortası
-                         cizgi1.setPosition({solUstX + 100.f, solUstY + 100.f});
-                         cizgi1.setRotation(sf::degrees(45.f)); //45 derece sağa döndür
-                         xCizgileri.push_back(cizgi1);
-
-                         sf::RectangleShape cizgi2;// X'in ikinci çizgisi
-                         cizgi2.setSize({170.f, kalinlik});
-                         cizgi2.setFillColor(sf::Color::Red);
-                         cizgi2.setOrigin({85.f, kalinlik / 2.f});
-                         cizgi2.setPosition({solUstX + 100.f, solUstY + 100.f});
-                         cizgi2.setRotation(sf::degrees(135.f));//135 derece döndür
-                         xCizgileri.push_back(cizgi2);
-
-                         siraKimde=2;//sıra O'ya geçer
+                         xCizgisiEkle(xCizgileri,satir,sutun);
+                         siraKimde=2;
                       }  
                       else{
-
-                         //O için görsel kısım
-                         sf::CircleShape daire(50.f);
-                         daire.setPointCount(150);//Daireyi daha pürüzsüz göstermek için
-                         daire.setFillColor(sf::Color::Transparent); 
-                         daire.setOutlineThickness(16.f); 
-                         daire.setOutlineColor(sf::Color::Blue); 
-
-                         daire.setOrigin({50.f, 50.f});//Dairenin merkezini kendi ortası yapıyoruz kareye tam oturması için
- 
-                         float merkezX = sutun * 200.f + 100.f;//karenin merkez koordinatı 
-                         float merkezY = satir * 200.f + 100.f;
-                         daire.setPosition({merkezX, merkezY});
-                         daireler.push_back(daire);
-
-                         siraKimde=1;//sıra x'e geçer
+                         oDairesiEkle(daireler,satir,sutun);
+                         siraKimde=1;
                          }      
-                  
                          int durum = kazananiKontrolEt(tahta);
 
                          if (durum == 1) {
