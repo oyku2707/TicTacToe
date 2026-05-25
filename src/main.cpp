@@ -8,7 +8,7 @@
 #include "../include/oyunTahtasi.hpp"
 #include "../include/yapayZeka.hpp"
 
-enum OyunDurumu { secimAlani,oyunAlani};
+enum OyunDurumu { secimAlani,oyunAlani,oyunBitti};
 
 int main() {
     sf::RenderWindow pencere(sf::VideoMode({600, 600}), "Tic Tac Toe");
@@ -17,6 +17,9 @@ int main() {
     OyunDurumu suan=secimAlani;
     int siraKimde=1;
     int tahta[3][3]={{0,0,0},{0,0,0},{0,0,0}};//Oyun tahtası bütün hücreler boş
+
+    int insanTasi=1;
+    int yapayZekaTasi=2;
 
     std::vector<sf::RectangleShape> cizgiler;
     std::vector<sf::CircleShape> daireler;
@@ -43,19 +46,34 @@ int main() {
                     if (suan == secimAlani) {
                         int secim = secimKontrolu(x,y);
                         if (secim != 0) {
-                            siraKimde = secim; 
-                            suan = oyunAlani;    
+                            if(secim==1){//oyuncu x'i seçerse
+                                insanTasi=1;
+                                yapayZekaTasi=2;
+                                siraKimde=1;
+                            }
+                            else if(secim==2){//oyuncu o'yu seçerse
+                                insanTasi=2;
+                                yapayZekaTasi=1;
+                                siraKimde=2;
+                                yzSaati.restart();
+                                yzZamanlayiciBasladi=true;
+                            }  
+                            suan=oyunAlani; 
                     }}
                      else if(suan==oyunAlani && siraKimde == 1) { //sadece sıra insandaysa
                          int sutun=x/200;//hangi hücreyi tıkladığını anlamak için
                          int satir=y/200;
 
                          if (tahta[satir][sutun] == 0) {//hücre boşsa hamle yap
-                         tahta[satir][sutun] = siraKimde;
-                    
-                         xCizgisiEkle(xCizgileri, satir, sutun);
-                         siraKimde = 2; 
+                         tahta[satir][sutun] = insanTasi;
 
+                         if(insanTasi==1){
+                            xCizgisiEkle(xCizgileri, satir, sutun); 
+                         }
+                         else{
+                            oDairesiEkle(daireler, satir, sutun);
+                         }
+                         siraKimde = 2; 
                          yzSaati.restart();
                          yzZamanlayiciBasladi = true;
                          
@@ -63,7 +81,7 @@ int main() {
                          if (durum != 0) {
                            if (durum == 1) std::cout << "TEBRİKLER! KAZANDIN!" << std::endl;
                            else if (durum == 3) std::cout << "OYUN BERABERE BİTTİ!" << std::endl;
-                           pencere.close(); 
+                           suan=oyunBitti; 
                        }
                      }
                   }
@@ -79,8 +97,14 @@ int main() {
                 int yzSutun = yzHamle.second;
 
                 if (yzSatir != -1 && yzSutun != -1) {//yapay zeka hamlesi
-                tahta[yzSatir][yzSutun] = 2;
-                oDairesiEkle(daireler, yzSatir, yzSutun);
+                tahta[yzSatir][yzSutun] = yapayZekaTasi;
+                
+                if(yapayZekaTasi==1){
+                   xCizgisiEkle(xCizgileri, yzSatir, yzSutun); 
+                }
+                else{
+                   oDairesiEkle(daireler, yzSatir, yzSutun); 
+                }
                 siraKimde = 1; 
                 yzZamanlayiciBasladi = false;//sayacı sıfırla
                 
@@ -88,7 +112,7 @@ int main() {
                 if (durum != 0) {
                     if (durum == 2) std::cout << "YAPAY ZEKA KAZANDI! DAHA ÇOK ÇALIŞMALISIN." << std::endl;
                     else if (durum == 3) std::cout << "OYUN BERABERE BİTTİ!" << std::endl;
-                    pencere.close();
+                    suan=oyunBitti;
                 }
             }
         }
