@@ -1,36 +1,47 @@
-# 🕹️ SFML ile Yapay Zeka Destekli Tic-Tac-Toe Oyunu
+# 🎮 SFML Tic-Tac-Toe (Yapay Zeka Destekli)
 
-Bu proje, C++ ve **SFML (Simple and Fast Multimedia Library)** kütüphanesi kullanılarak nesne yönelimli ve modüler bir mimariyle geliştirilmiş bir Tic-Tac-Toe (X-O-X) oyunudur. Oyunda, oyuncunun karşısında asla hata yapmayan ve en iyi hamleyi hesaplayan bir yapay zeka yer almaktadır.
-
----
-
-## 🚀 Özellikler
-
-* **Minimax Yapay Zeka Algoritması:** Bilgisayarın hamlelerini yöneten, oyunun tüm olasılık ağacını tarayarak her zaman en optimal kararı veren yenilmez yapay zeka mekanizması.
-* **Doğal Oyun Deneyimi (Gecikme Sistemi):** Yapay zekanın hamlelerini anında yapmak yerine, gerçek bir rakip gibi "düşünüyormuş" hissi yaratması için eklenmiş zaman ayarlı (1.5 saniye) gecikme mekanizması.
-* **Gelişmiş Grafik Kalitesi:** Donanımsal `8x Anti-Aliasing (Kenar Yumuşatma)` desteği ile pürüzsüz ve piksellenmeyen nesne çizimleri.
-* **Modüler Mimari:** Proje, nesne yönelimli ve modüler programlama prensiplerine uygun olarak temiz ve sürdürülebilir bir `include/` ve `src/` yapısına ayrılmıştır.
-* **Akıllı Çizim Sistemi:** Dinamik `sf::RectangleShape` ve `sf::CircleShape` manipülasyonları ile simetrik X ve O harfi konumlandırması.
-* **Oyun Mekaniği:** Her hamle sonrası matris taraması yapan, zaman karmaşıklığı optimize edilmiş kazanma/beraberlik kontrol algoritması.
+Kocaeli Üniversitesi Yazılım Mühendisliği dönemi kapsamında C++ ve SFML (Simple and Fast Multimedia Library) kullanılarak geliştirilmiş, modern kullanıcı arayüzüne (UI) ve Minimax algoritmalı Yapay Zekaya sahip akıllı bir Tic-Tac-Toe oyunudur.
 
 ---
 
-## 📂 Proje Yapısı
+## ✨ Öne Çıkan Özellikler
 
-```text
+* **Katmanlı Pop-Up Sistemi (Overlay):** Oyun, tek bir 600x600 pencere içinde başlar. Karakter seçimi ve oyun sonu ekranları, arkadaki oyun tahtasını silmeden "sekme içinde sekme" mantığıyla akıcı bir şekilde açılır.
+* **Gelişmiş Yapay Zeka:** Minimax algoritması sayesinde yenilmez bir rakibe karşı oynarsınız. Yapay zeka hamleleri öncesinde 1.5 saniyelik gerçekçi bir düşünme gecikmesi simüle edilir.
+* **Dinamik Oyun Döngüsü:** Oyun bittiğinde terminale bağımlı kalmadan GUI üzerinden doğrudan "Yeniden Başlat" veya "Çıkış" aksiyonları alınabilir.
+* **Tam Modüler Mimari:** Temiz kod prensiplerine uygun, sorumlulukların tamamen ayrıldığı (`src/` ve `include/`) nesne yönelimli dosya yapısı.
+
+---
+
+## 📂 Proje Dosya Yapısı
+
 TicTacToe/
-├── Makefile             # Derleme otomasyonu ayarları
-├── README.md            # Proje dokümantasyonu
 ├── include/
-│   ├── oyunArayuzu.hpp  # Seçim ve çizim ekranı arayüz başlıkları
-│   ├── oyunMekanigi.hpp # Kazanma kontrolü algoritması başlık dosyası
-│   ├── oyunTahtasi.hpp  # Izgara ve şekil çizim fonksiyonları başlıkları
-│   ├── oyuncuSecimi.hpp # Oyuncu seçimi mantığı başlık dosyası
-│   └── yapayZeka.hpp    # Minimax yapay zeka fonksiyon başlıkları
-└── src/
-    ├── main.cpp         # SFML Grafik döngüsü ve ana event yönetimi
-    ├── oyunArayuzu.cpp  # Seçim ekranı ve oyun içi görsel çizimler
-    ├── oyunMekanigi.cpp # Oyun lojistiği ve matris kontrol mantığı
-    ├── oyunTahtasi.cpp  # Tahta çizgileri ve X/O figürlerinin oluşturulması
-    ├── oyuncuSecimi.cpp # Seçim ekranı koordinat kontrol mantığı
-    └── yapayZeka.cpp    # Minimax algoritması hesaplama gövdesi
+│   ├── oyunMekanigi.hpp  # Kazanma ve beraberlik kontrol lojistiği
+│   ├── oyunArayuzu.hpp   # Genel arayüz tanımlamaları
+│   ├── oyunTahtasi.hpp   # 3x3 ızgara çizgilerinin oluşturulması
+│   ├── oyuncuSecimi.hpp  # Başlangıç X/O panel çizimi ve kontrolü
+│   ├── yapayZeka.hpp     # Minimax yapay zeka algoritması
+│   └── oyunSonu.hpp      # Sonuç ekranı ve buton lojistiği
+├── src/
+│   ├── main.cpp          # Ana oyun döngüsü ve katmanlı çizim yönetimi
+│   ├── oyunMekanigi.cpp
+│   ├── oyunArayuzu.cpp
+│   ├── oyunTahtasi.cpp
+│   ├── oyuncuSecimi.cpp
+│   ├── yapayZeka.cpp
+│   └── oyunSonu.cpp      # Sonuç metinleri ve Restart/Quit buton mekanizmaları
+├── font.ttf              # Oyun içi metinlerin çizilmesi için gerekli font dosyası
+├── Makefile              # Kolay derleme otomasyonu
+└── README.md
+
+🛠️ Kurulum ve Çalıştırma
+Gereksinimler:
+1.C++17 destekleyen bir derleyici (GCC/Clang)
+2.SFML Kütüphanesi 
+Derleme Adımları:
+1.Projenin ana dizininde terminali açın.
+2.Eski derleme kalıntılarını temizlemek ve projeyi sıfırdan derlemek için şu komutu çalıştırın:
+make clean && make
+3.Derleme tamamlandıktan sonra oluşan çalıştırılabilir dosyayı başlatın:
+./main
