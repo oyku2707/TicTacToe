@@ -12,10 +12,8 @@ enum OyunDurumu { secimAlani,oyunAlani};
 
 int main() {
     sf::RenderWindow pencere(sf::VideoMode({600, 600}), "Tic Tac Toe");
-
-    pencere.setSize(sf::Vector2u(200, 200));
-    pencere.setView(sf::View(sf::FloatRect({0.f, 0.f}, {200.f, 200.f})));
-   
+    pencere.setFramerateLimit(60);
+    
     OyunDurumu suan=secimAlani;
     int siraKimde=1;
     int tahta[3][3]={{0,0,0},{0,0,0},{0,0,0}};//Oyun tahtası bütün hücreler boş
@@ -46,9 +44,7 @@ int main() {
                         int secim = secimKontrolu(x,y);
                         if (secim != 0) {
                             siraKimde = secim; 
-                            suan = oyunAlani;  
-                            pencere.setSize(sf::Vector2u(600, 600));
-                            pencere.setView(sf::View(sf::FloatRect({0.f, 0.f}, {600.f, 600.f})));   
+                            suan = oyunAlani;    
                     }}
                      else if(suan==oyunAlani && siraKimde == 1) { //sadece sıra insandaysa
                          int sutun=x/200;//hangi hücreyi tıkladığını anlamak için
@@ -97,13 +93,6 @@ int main() {
             }
         }
     }   
-        if(suan==secimAlani){
-            pencere.clear(sf::Color(211,211,211));
-            secimEkraniniCiz(pencere);
-            pencere.display();
-        }
-        else if(suan==oyunAlani){
-        //pencereyi temizle(acık gri yap)
         pencere.clear(sf::Color(211,211,211));
 
         for(const auto& cizgi:cizgiler){
@@ -115,9 +104,12 @@ int main() {
         for(const auto& xCizgi : xCizgileri){//X çiz
             pencere.draw(xCizgi);
         }
+        if(suan==secimAlani){
+            secimEkraniniCiz(pencere);
+        }
         // Çizilenleri ekrana yansıt
         pencere.display();
     }
-}
+
     return 0;
     }

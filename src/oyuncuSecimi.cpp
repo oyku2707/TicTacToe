@@ -1,13 +1,22 @@
 #include "../include/oyuncuSecimi.hpp"
+//pop-up ve buton koordinatları
+const float panelX = 150.f, panelY = 200.f;   
+const float panelGenislik = 300.f, panelYukseklik = 200.f;
 
-const float xButonX = 20.f, xButonY = 60.f;//buton konumları
-const float oButonX = 110.f, oButonY = 60.f;
-const float boyut = 70.f;//Butonların boyutu
+const float boyut = 70.f;                        
+const float xButonX = 185.f, xButonY = 280.f;     
+const float oButonX = 345.f, oButonY = 280.f;     
 
 void secimEkraniniCiz(sf::RenderWindow& pencere) {
-    pencere.clear(sf::Color(211, 211, 211)); //Arka plan için pencere
+  
+    sf::RectangleShape popUpKutu({panelGenislik,panelYukseklik});//pop-up kutusu
+    popUpKutu.setPosition({panelX,panelY});
+    popUpKutu.setFillColor(sf::Color(211,211,211,180));
+    popUpKutu.setOutlineThickness(4.f);
+    popUpKutu.setOutlineColor(sf::Color::Black);
+    pencere.draw(popUpKutu);
 
-    sf::RectangleShape xKutu({boyut,boyut});//X için buton
+    sf::RectangleShape xKutu({boyut, boyut});
     xKutu.setPosition({xButonX, xButonY});
     xKutu.setFillColor(sf::Color(50, 50, 50));
     xKutu.setOutlineThickness(3.f);
@@ -39,8 +48,6 @@ void secimEkraniniCiz(sf::RenderWindow& pencere) {
     daire.setOrigin({20.f,20.f});
     daire.setPosition({oButonX + 35.f, oButonY + 35.f});
     pencere.draw(daire);
-
-    pencere.display();
 }
 int secimKontrolu(int x, int y) {
     if (x>= xButonX && x <= xButonX + boyut && y >= xButonY && y <= xButonY +boyut) {
