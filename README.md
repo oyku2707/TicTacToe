@@ -1,47 +1,56 @@
 # 🎮 SFML Tic-Tac-Toe (Yapay Zeka Destekli)
 
-Kocaeli Üniversitesi Yazılım Mühendisliği dönemi kapsamında C++ ve SFML (Simple and Fast Multimedia Library) kullanılarak geliştirilmiş, modern kullanıcı arayüzüne (UI) ve Minimax algoritmalı Yapay Zekaya sahip akıllı bir Tic-Tac-Toe oyunudur.
+Bu proje, Kocaeli Üniversitesi Yazılım Mühendisliği bölümü kapsamında C++ ve SFML (Simple and Fast Multimedia Library) kütüphanesi kullanılarak geliştirilmiştir. Modern katmanlı grafik kullanıcı arayüzüne (UI Overlay) ve yenilmez Minimax algoritmasına sahip akıllı bir Tic-Tac-Toe oyunudur. Proje, Nesne Yönelimli Programlama (OOP) prensiplerine ve tam modüler bir mimari tasarıma sadık kalınarak temiz kod (clean code) standartlarında geliştirilmiştir.
 
 ---
 
-## ✨ Öne Çıkan Özellikler
+## 🛠️ Kullanılan Teknolojiler ve Mimari Standartlar
 
-* **Katmanlı Pop-Up Sistemi (Overlay):** Oyun, tek bir 600x600 pencere içinde başlar. Karakter seçimi ve oyun sonu ekranları, arkadaki oyun tahtasını silmeden "sekme içinde sekme" mantığıyla akıcı bir şekilde açılır.
-* **Gelişmiş Yapay Zeka:** Minimax algoritması sayesinde yenilmez bir rakibe karşı oynarsınız. Yapay zeka hamleleri öncesinde 1.5 saniyelik gerçekçi bir düşünme gecikmesi simüle edilir.
-* **Dinamik Oyun Döngüsü:** Oyun bittiğinde terminale bağımlı kalmadan GUI üzerinden doğrudan "Yeniden Başlat" veya "Çıkış" aksiyonları alınabilir.
-* **Tam Modüler Mimari:** Temiz kod prensiplerine uygun, sorumlulukların tamamen ayrıldığı (`src/` ve `include/`) nesne yönelimli dosya yapısı.
+* **Programlama Dili:** C++17 Standartları (Akıllı yapılar, vektörler ve bellek optimizasyonları)
+* **Grafik Kütüphanesi:** SFML (Simple and Fast Multimedia Library)
+* **Tasarım Deseni:** Durum Makinesi (State Machine - `secimAlani`, `oyunAlani`, `oyunBitti` aşamaları)
+* **Derleme Otomasyonu:** GNU Make (Makefile mimarisi)
+
+---
+
+## ✨ Öne Çıkan Teknik Özellikler
+
+* **Katmanlı Pop-Up Sistemi (UI Overlay):** Oyun, tek bir 600x600 çözünürlüğündeki pencere içinde çalışır. Başlangıçtaki karakter seçim ekranı (`PLAYER CHOICE`) ve oyun sonu sonuç ekranları, arkadaki ana oyun tahtasını silmeden veya yeni pencere açmadan yarı saydam birer arayüz katmanı olarak ekrana çizilir.
+* **Gelişmiş Minimax Yapay Zekası:** Bilgisayar rakibi, oyun ağacındaki tüm olasılıkları hesaplayan ve en kötü senaryoda bile beraberliği garanti eden Minimax algoritmasını kullanır. Kullanıcı deneyimini doğallaştırmak adına, yapay zeka hamle yapmadan önce asenkron bir şekilde 1.5 saniyelik (`1500 ms`) gerçekçi bir düşünme gecikmesi simüle eder.
+* **Küresel İngilizce Arayüz Bütünlüğü:** Projede dil bütünlüğü kurallarına tam uyum sağlanmıştır. Açılışta `PLAYER CHOICE`, oyun bitiminde ise dinamik olarak `YOU WIN!`, `YOU LOSE!` veya `DRAW!` ekranları modern arcade estetiğiyle sunulur.
+* **Dinamik Grafik Döngüsü:** Oyun tamamen terminal (konsol) bağımlılığından kurtarılmıştır. Oyuncular oyun bittikten sonra doğrudan arayüz üzerindeki grafik butonları (`RESTART` ve `QUIT`) kullanarak oyunu baştan başlatabilir veya kapatabilirler.
+* **Tam Modüler Yapı:** Sorumlulukların ayrılması (Separation of Concerns) ilkesine uygun olarak kod tabanı `src/` ve `include/` dizinleri altında tamamen bağımsız modüllere bölünmüştür.
 
 ---
 
 ## 📂 Proje Dosya Yapısı
 
+```text
 TicTacToe/
 ├── include/
-│   ├── oyunMekanigi.hpp  # Kazanma ve beraberlik kontrol lojistiği
-│   ├── oyunArayuzu.hpp   # Genel arayüz tanımlamaları
-│   ├── oyunTahtasi.hpp   # 3x3 ızgara çizgilerinin oluşturulması
-│   ├── oyuncuSecimi.hpp  # Başlangıç X/O panel çizimi ve kontrolü
-│   ├── yapayZeka.hpp     # Minimax yapay zeka algoritması
-│   └── oyunSonu.hpp      # Sonuç ekranı ve buton lojistiği
+│   ├── oyunMekanigi.hpp  # Kazanma durumları ve beraberlik kontrol lojistiği
+│   ├── oyunArayuzu.hpp   # Genel arayüz yapılandırmaları ve ekran sabitleri
+│   ├── oyunTahtasi.hpp   # 3x3 oyun ızgarasının çizgi sınırları
+│   ├── oyuncuSecimi.hpp  # Başlangıç karakter seçim paneli (PLAYER CHOICE)
+│   ├── yapayZeka.hpp     # Minimax karar ağacı algoritması hesaplamaları
+│   └── oyunSonu.hpp      # Oyun sonu pop-up çizimi ve aksiyon yönetimi
 ├── src/
-│   ├── main.cpp          # Ana oyun döngüsü ve katmanlı çizim yönetimi
+│   ├── main.cpp          # Ana oyun döngüsü, durum makinesi ve katmanlı render yönetimi
 │   ├── oyunMekanigi.cpp
 │   ├── oyunArayuzu.cpp
 │   ├── oyunTahtasi.cpp
 │   ├── oyuncuSecimi.cpp
 │   ├── yapayZeka.cpp
-│   └── oyunSonu.cpp      # Sonuç metinleri ve Restart/Quit buton mekanizmaları
-├── font.ttf              # Oyun içi metinlerin çizilmesi için gerekli font dosyası
-├── Makefile              # Kolay derleme otomasyonu
+│   └── oyunSonu.cpp      # RESTART ve QUIT buton lojistikleri ve tıklama alanları
+├── font.ttf              # Yazıların ekrana çizilebilmesi için gerekli TrueType Font dosyası
+├── Makefile              # Projenin tek komutla derlenmesini sağlayan otomasyon scripti
 └── README.md
 
-🛠️ Kurulum ve Çalıştırma
-Gereksinimler:
-1.C++17 destekleyen bir derleyici (GCC/Clang)
-2.SFML Kütüphanesi 
-Derleme Adımları:
-1.Projenin ana dizininde terminali açın.
-2.Eski derleme kalıntılarını temizlemek ve projeyi sıfırdan derlemek için şu komutu çalıştırın:
-make clean && make
-3.Derleme tamamlandıktan sonra oluşan çalıştırılabilir dosyayı başlatın:
-./main
+### Derleme ve Çalıştırma Adımları
+
+1. Terminali (Konsolu) projenin ana kök dizininde açın.
+2. Eski derleme kalıntılarını temizlemek ve projeyi sıfırdan hatasız derlemek için şu komutu çalıştırın:
+   make clean && make
+3.Derleme başarılı bir şekilde tamamlandıktan sonra oluşan çalıştırılabilir dosyayı sisteminize göre başlatın:
+macOS / Linux:./main  # (Veya Makefile içinde tanımladığınız çıktı adı, örn: ./TicTacToe)
+Windows (MinGW/MSYS2):main.exe
