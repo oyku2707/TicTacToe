@@ -1,4 +1,5 @@
 #include "../include/oyuncuSecimi.hpp"
+#include <iostream>
 //pop-up ve buton koordinatları
 const float panelX = 150.f, panelY = 200.f;   
 const float panelGenislik = 300.f, panelYukseklik = 200.f;
@@ -15,6 +16,16 @@ void secimEkraniniCiz(sf::RenderWindow& pencere) {
     popUpKutu.setOutlineThickness(4.f);
     popUpKutu.setOutlineColor(sf::Color::Black);
     pencere.draw(popUpKutu);
+
+    sf::Font font;//font yükleme
+    if (!font.openFromFile("font.ttf")) {
+    std::cout << "Font dosyasi ana dizinde bulunamadi!" << std::endl;
+    }
+    sf::Text baslik(font, "PLAYER CHOICE", 20);
+    baslik.setStyle(sf::Text::Bold);
+    baslik.setFillColor(sf::Color(240,240,240));
+    baslik.setPosition({210.f,230.f});
+    pencere.draw(baslik);
 
     sf::RectangleShape xKutu({boyut, boyut});
     xKutu.setPosition({xButonX, xButonY});

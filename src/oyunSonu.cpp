@@ -25,18 +25,20 @@ void sonucEkraniniCiz(sf::RenderWindow& pencere, int durum, int insanTasi) {
     metin.setStyle(sf::Text::Bold);
 
     if (durum == 3) {
-        metin.setString("BERABERE!");
-        metin.setFillColor(sf::Color(140,160,190)); 
+        metin.setString("DRAW!");
+        metin.setFillColor(sf::Color(140,160,190));
+        metin.setPosition({245.f, 200.f}); 
     } 
     else if (durum == insanTasi) {
-        metin.setString("KAZANDIN!");
+        metin.setString("YOU WIN!");
         metin.setFillColor(sf::Color(120,255,170));
+        metin.setPosition({235.f, 200.f});
     } 
     else {
-        metin.setString("KAYBETTIN!");
-        metin.setFillColor(sf::Color(255,70,150)); 
+        metin.setString("YOU LOSE!");
+        metin.setFillColor(sf::Color(255,70,150));
+        metin.setPosition({220.f, 200.f}); 
     }
-    metin.setPosition({210.f, 200.f});//yazıyı pop-p ekranına yazdırma
     pencere.draw(metin);
 
     sf::RectangleShape resButon({bBoyutX, bBoyutY});//yeniden başlatma butonu
@@ -44,9 +46,9 @@ void sonucEkraniniCiz(sf::RenderWindow& pencere, int durum, int insanTasi) {
     resButon.setFillColor(sf::Color(50,120,220)); 
     pencere.draw(resButon);
 
-    sf::Text resMetin(font, "YENIDEN BASLAT", 16);//yeniden başlat yazısı
+    sf::Text resMetin(font, "RESTART", 16);//yeniden başlat yazısı
     resMetin.setFillColor(sf::Color(240,240,240));
-    resMetin.setPosition({235.f, 333.f});
+    resMetin.setPosition({260.f, 333.f});
     pencere.draw(resMetin);
 
     sf::RectangleShape qButon({bBoyutX, bBoyutY});//çıkış butonu
@@ -54,9 +56,9 @@ void sonucEkraniniCiz(sf::RenderWindow& pencere, int durum, int insanTasi) {
     qButon.setFillColor(sf::Color(180,60,80)); 
     pencere.draw(qButon);
 
-    sf::Text qMetin(font, "CIKIS", 16);//çıkış yazısı
+    sf::Text qMetin(font, "QUIT", 16);//çıkış yazısı
     qMetin.setFillColor(sf::Color(245,245,245));
-    qMetin.setPosition({275.f, 393.f});
+    qMetin.setPosition({280.f, 393.f});
     pencere.draw(qMetin);
 }
 int sonucKontrolu(int x, int y) {
