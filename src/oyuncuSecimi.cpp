@@ -11,7 +11,7 @@ void secimEkraniniCiz(sf::RenderWindow& pencere) {
   
     sf::RectangleShape popUpKutu({panelGenislik,panelYukseklik});//pop-up kutusu
     popUpKutu.setPosition({panelX,panelY});
-    popUpKutu.setFillColor(sf::Color(211,211,211,180));
+    popUpKutu.setFillColor({40,44,68});
     popUpKutu.setOutlineThickness(4.f);
     popUpKutu.setOutlineColor(sf::Color::Black);
     pencere.draw(popUpKutu);
@@ -24,7 +24,7 @@ void secimEkraniniCiz(sf::RenderWindow& pencere) {
     pencere.draw(xKutu);
 
     sf::RectangleShape cizgi1({50.f,6.f});//X yazısı
-    cizgi1.setFillColor(sf::Color::Red);
+    cizgi1.setFillColor({255,90,90});
     cizgi1.setOrigin({25.f,3.f});
     cizgi1.setPosition({xButonX + 35.f, xButonY + 35.f});
     cizgi1.setRotation(sf::degrees(45.f));
@@ -44,7 +44,7 @@ void secimEkraniniCiz(sf::RenderWindow& pencere) {
     sf::CircleShape daire(20.f);//O yazısı
     daire.setFillColor(sf::Color::Transparent);
     daire.setOutlineThickness(6.f);
-    daire.setOutlineColor(sf::Color::Blue);
+    daire.setOutlineColor({80,200,255});
     daire.setOrigin({20.f,20.f});
     daire.setPosition({oButonX + 35.f, oButonY + 35.f});
     pencere.draw(daire);

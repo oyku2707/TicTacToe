@@ -7,7 +7,7 @@ void xCizgisiEkle(std::vector<sf::RectangleShape>& xCizgileri, int satir, int su
 
     sf::RectangleShape cizgi1;
     cizgi1.setSize({170.f, kalinlik});// x'in birinci çizgisi
-    cizgi1.setFillColor(sf::Color::Red); 
+    cizgi1.setFillColor({255,90,90}); 
     cizgi1.setOrigin({85.f, kalinlik / 2.f});//Dönme merkezi çizginin ortası
     cizgi1.setPosition({solUstX + 100.f, solUstY + 100.f});
     cizgi1.setRotation(sf::degrees(45.f)); 
@@ -22,7 +22,7 @@ void oDairesiEkle(std::vector<sf::CircleShape>& daireler, int satir, int sutun) 
     daire.setPointCount(150);
     daire.setFillColor(sf::Color::Transparent); 
     daire.setOutlineThickness(16.f); 
-    daire.setOutlineColor(sf::Color::Blue); 
+    daire.setOutlineColor({80,200,255}); 
     daire.setOrigin({50.f, 50.f});
  
     float merkezX = sutun * 200.f + 100.f; 

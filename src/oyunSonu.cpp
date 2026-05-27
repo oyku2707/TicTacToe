@@ -11,7 +11,7 @@ const float quitX = 190.f, quitY = 380.f;
 void sonucEkraniniCiz(sf::RenderWindow& pencere, int durum, int insanTasi) {
     sf::RectangleShape panel({sonucPanelGen, sonucPanelYuk});//arka plan paneli
     panel.setPosition({sonucPanelX, sonucPanelY});
-    panel.setFillColor(sf::Color(211,211,211,180)); 
+    panel.setFillColor(sf::Color(40,44,68)); 
     panel.setOutlineThickness(4.f);
     panel.setOutlineColor(sf::Color::Black);
     pencere.draw(panel);
@@ -26,36 +26,36 @@ void sonucEkraniniCiz(sf::RenderWindow& pencere, int durum, int insanTasi) {
 
     if (durum == 3) {
         metin.setString("BERABERE!");
-        metin.setFillColor(sf::Color(253, 203, 110)); 
+        metin.setFillColor(sf::Color(140,160,190)); 
     } 
     else if (durum == insanTasi) {
         metin.setString("KAZANDIN!");
-        metin.setFillColor(sf::Color(46, 204, 113));
+        metin.setFillColor(sf::Color(120,255,170));
     } 
     else {
         metin.setString("KAYBETTIN!");
-        metin.setFillColor(sf::Color(231, 76, 60)); 
+        metin.setFillColor(sf::Color(255,70,150)); 
     }
     metin.setPosition({210.f, 200.f});//yazıyı pop-p ekranına yazdırma
     pencere.draw(metin);
 
     sf::RectangleShape resButon({bBoyutX, bBoyutY});//yeniden başlatma butonu
     resButon.setPosition({restartX, restartY});
-    resButon.setFillColor(sf::Color(0, 184, 148)); 
+    resButon.setFillColor(sf::Color(50,120,220)); 
     pencere.draw(resButon);
 
     sf::Text resMetin(font, "YENIDEN BASLAT", 16);//yeniden başlat yazısı
-    resMetin.setFillColor(sf::Color::White);
+    resMetin.setFillColor(sf::Color(240,240,240));
     resMetin.setPosition({235.f, 333.f});
     pencere.draw(resMetin);
 
     sf::RectangleShape qButon({bBoyutX, bBoyutY});//çıkış butonu
     qButon.setPosition({quitX, quitY});
-    qButon.setFillColor(sf::Color(214, 48, 49)); 
+    qButon.setFillColor(sf::Color(180,60,80)); 
     pencere.draw(qButon);
 
     sf::Text qMetin(font, "CIKIS", 16);//çıkış yazısı
-    qMetin.setFillColor(sf::Color::White);
+    qMetin.setFillColor(sf::Color(245,245,245));
     qMetin.setPosition({275.f, 393.f});
     pencere.draw(qMetin);
 }

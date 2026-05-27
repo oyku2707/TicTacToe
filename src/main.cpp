@@ -134,7 +134,7 @@ int main() {
             }
         }
     }   
-        pencere.clear(sf::Color(211,211,211));
+        pencere.clear(sf::Color(32,34,54));
 
         for(const auto& cizgi:cizgiler){
             pencere.draw(cizgi);
