@@ -74,7 +74,7 @@ TicTacToe/
 
 Projeyi canlı olarak çalışırken izlemek için aşağıdaki bağlantıdan demo videosuna ulaşabilirsiniz:
 
-▶️ https://drive.google.com/file/d/1l1m9jMpucW7VrKc_lFX-yWU55KxSqk3X/view?usp=sharing
+▶️ [Google Drive üzerinden Proje Demo Videosunu İzle](https://drive.google.com/file/d/1l1m9jMpucW7VrKc_lFX-yWU55KxSqk3X/view?usp=sharing)
 
 
 
