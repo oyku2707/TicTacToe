@@ -3,9 +3,9 @@
 Bu proje, Kocaeli Üniversitesi Yazılım Mühendisliği bölümü kapsamında C++ ve SFML (Simple and Fast Multimedia Library) kütüphanesi kullanılarak geliştirilmiştir. Modern katmanlı grafik kullanıcı arayüzüne ve yenilmez Minimax algoritmasına sahip akıllı bir Tic-Tac-Toe oyunudur. Proje, Nesne Yönelimli Programlama (OOP) prensiplerine ve tam modüler bir mimari tasarıma sadık kalınarak geliştirilmiştir.
 
 # Geliştirici:
-Ad-Soyad:Öykü Ertuna
-Öğrenci Numarası:240229036
-Bölüm:Yazılım Mühendisliği
+* Ad-Soyad:Öykü Ertuna
+* Öğrenci Numarası:240229036
+* Bölüm:Yazılım Mühendisliği
 
 ## 🛠️ Kullanılan Teknolojiler ve Mimari Standartlar
 
@@ -69,6 +69,8 @@ TicTacToe/
 ├── Makefile             
 └── README.md
 
-## 🎬 Proje Demo Gösterimi
+## 🎬 Proje Demo Videosu
 
-![Oyun Demo Videosu](demo.gif)
+Projeyi canlı olarak çalışırken izlemek için aşağıdaki bağlantıdan demo videosuna ulaşabilirsiniz:
+
+▶️ [Google Drive üzerinden Demo Videosunu İzle] https://drive.google.com/file/d/1l1m9jMpucW7VrKc_lFX-yWU55KxSqk3X/view?usp=sharing
