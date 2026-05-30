@@ -1,3 +1,4 @@
+<img width="800" height="834" alt="demo" src="https://github.com/user-attachments/assets/9c25138b-a1cf-4dc0-b38f-dbeece74851c" />
 # 🎮 SFML Tic-Tac-Toe (Yapay Zeka Destekli)
 
 Bu proje, Kocaeli Üniversitesi Yazılım Mühendisliği bölümü kapsamında C++ ve SFML (Simple and Fast Multimedia Library) kütüphanesi kullanılarak geliştirilmiştir. Modern katmanlı grafik kullanıcı arayüzüne ve yenilmez Minimax algoritmasına sahip akıllı bir Tic-Tac-Toe oyunudur. Proje, Nesne Yönelimli Programlama (OOP) prensiplerine ve tam modüler bir mimari tasarıma sadık kalınarak geliştirilmiştir.
